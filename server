@@ -1,0 +1,42 @@
+var express = require('express');
+var path = require('path')
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+var app = express();
+var cors = require('cors');
+
+app.use(cors());
+app.options('*', cors());
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static('public'));
+
+var entry = "open"
+
+// var openDoor = function(){
+//   entry = "open"
+// }
+
+app.post('/inform', function(req, res){
+  // openDoor();
+  // var data = req.body;
+  res.send(200);
+
+  // console.log('these are the amzon ids', amazonIds);
+  //then send back an object with all of the IDs for the products
+  // function returnProducts(error, product) {
+  //   productData.push(product);
+  //   if (productData.length === amazonIds.length) {
+  //     res.send(JSON.stringify(responseData));
+  //   }
+  // }
+});
+
+app.post('/decision', function(req, res){
+  res.send(entry)
+})
+
+var port = process.env.PORT || 3000;
+app.listen(port);
+console.log('listing on Port ', port);
